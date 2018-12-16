@@ -10,19 +10,24 @@ public class SymbolTable {
 
     private int ptr = 0;
 
-    public SymbolTable(){
+    public SymbolTable() {
         allSymbol = new ArrayList<EachSymbol>();
     }
 
     //Insert a const to symbol table
-    public void insertConst(String name, int level, int value, int address){
+    public void insertConst(String name, int level, int value, int address) {
         allSymbol.add(new EachSymbol(con, value, level, address, 0, name));
         ptr++;
     }
 
     //Insert a variable to symbol table
-    public void insertVar(String name, int level, int address){
+    public void insertVar(String name, int level, int address) {
         allSymbol.add(new EachSymbol(var, level, address, 0, name));
+        ptr++;
+    }
+
+    public void insertProc(String name, int level, int address) {
+        allSymbol.add(new EachSymbol(proc, level, address, 0, name));
         ptr++;
     }
 
@@ -30,9 +35,13 @@ public class SymbolTable {
     //存疑？
     //这样暴力查找好像存在一些问题
     public boolean isNowExists(String name, int level) {
-        for (int i = 0; i < allSymbol.size(); i++) {
-            if (allSymbol.get(i).getName().equals(name) && allSymbol.get(i).getLevel() == level) {
-                return true;
+        for (int i = allSymbol.size() - 1; i >= 0; --i) {
+            if (allSymbol.get(i).getLevel() == level) {
+                if (allSymbol.get(i).getName().equals(name)) {
+                    return true;
+                }
+            } else {
+                break;
             }
         }
         return false;

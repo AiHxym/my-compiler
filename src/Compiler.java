@@ -33,10 +33,9 @@ public class Compiler extends JFrame{
     private JMenuBar menuBar;
     private JMenu fileMenu;
     private JMenu projectMenu;
-    private JMenu helpMenu;
     private JTextArea jTextArea;
     private JScrollPane jScrollPane;
-    private JMenuItem openItem, closeItem, saveItem,aboutItem;
+    private JMenuItem openItem, closeItem, saveItem;
     private JMenuItem compileItem, runItem;
 
     private FileDialog open,save;
@@ -74,11 +73,14 @@ public class Compiler extends JFrame{
     private List<String> output;
     private boolean success = false;
 
+    JFrame tmp = new JFrame("语法树");
+
     public Compiler() {
         init();
     }
 
     private void init() {
+
         JFrame frame = new JFrame("PL0Compiler");
         frame.setBounds(300, 300, 700, 450);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -86,7 +88,6 @@ public class Compiler extends JFrame{
         menuBar = new JMenuBar();//菜单栏
         fileMenu = new JMenu("文件");
         projectMenu = new JMenu("项目");
-        helpMenu = new JMenu("帮助");
 
         jTextArea = new JTextArea(10, 40);
         jTextArea.setFont(new Font("Monospaced",1,20));
@@ -101,7 +102,6 @@ public class Compiler extends JFrame{
         openItem = new JMenuItem("打开");
         saveItem = new JMenuItem("保存");
         closeItem = new JMenuItem("关闭");
-        aboutItem = new JMenuItem("关于");
         compileItem = new JMenuItem("编译");
         runItem = new JMenuItem("运行");
 
@@ -109,13 +109,11 @@ public class Compiler extends JFrame{
         //添加字菜单项到菜单项
         menuBar.add(fileMenu);
         menuBar.add(projectMenu);
-        menuBar.add(helpMenu);
         fileMenu.add(openItem);
         fileMenu.add(saveItem);
         fileMenu.add(closeItem);
         projectMenu.add(compileItem);
         projectMenu.add(runItem);
-        helpMenu.add(aboutItem);
 
         //设置token表格
         tokenTable = new JTable(tokenTableModel);
@@ -167,13 +165,6 @@ public class Compiler extends JFrame{
             }
         });
 
-        aboutItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "PL0Compiler\n"
-                        + "made by shiyi001\ni_am_shiyi@163.com");
-            }
-        });
 
         openItem.addActionListener(new ActionListener() {//菜单条目监听：打开
             public void actionPerformed(ActionEvent e) {
@@ -264,6 +255,9 @@ public class Compiler extends JFrame{
             consoleMessage += "compile succeed!\n";
             //consoleMessage += "请输入" + readNum + "个数，每行一个\n";
             errorMessage.setText(consoleMessage);
+
+            tmp.add(gsa.jTree);
+            tmp.setVisible(true);
         } else {
             displayErrorMessage();
             consoleMessage += "compile failed!";

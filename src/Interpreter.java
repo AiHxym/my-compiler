@@ -1,45 +1,29 @@
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 public class Interpreter {
-    private int STACK_SIZE = 1000;
+    private final int STACK_SIZE = 1000;
     private int[] dataStack = new int[STACK_SIZE];
     private List<EachPcode> pcode;
-    private List<Integer> input;
-    private int inputPtr;
-    private List <String> output;
+
 
     public Interpreter() {
 
-    }
-
-    public Interpreter(List<Integer> _input) {
-        input = _input;
-        output = new ArrayList<String>();
     }
 
     public void setAllPcode(PcodeTable pcodeTable) {
         pcode = pcodeTable.getAllPcode();
     }
 
-    public List<String> getOutput() {
-        return output;
-    }
-
     public void interpreter() {
-        int pc = 0; //程序计数器，指向下一条指令
-        int base = 0; //当前基地址
-        int top = 0; //程序运行栈栈顶
+        int pc = 0;  //program counter
+        int base = 0;  //the current base address
+        int top = 0;  //the top point of stack
         do {
-            EachPcode currentPcode = pcode.get(pc);
-            pc++;
+            EachPcode currentPcode = pcode.get(pc++);
             if (currentPcode.getF() == Operator.LIT) {
-                //LIT：将常量送到运行栈S的栈顶，这时A段为常量值
-                dataStack[top] = currentPcode.getA();
-                top++;
+                dataStack[top++] = currentPcode.getA();
             } else if (currentPcode.getF() == Operator.OPR) {
-                //OPR：关系或算术运算，A段指明具体运算
                 switch(currentPcode.getA()) {
                     case 0:
                         //OPR 0 0   过程调用结束后,返回调用点并退栈
@@ -135,30 +119,26 @@ public class Interpreter {
                         //OPR 0 14  栈顶值输出至屏幕
                         System.out.print(dataStack[top - 1]);
                         System.out.print(" ");
-                        //output.add(dataStack[top - 1] + " ");
                         break;
                     case 15:
                         //OPR 0 15  屏幕输出换行
                         System.out.println();
-                        //output.add("\n");
                         break;
                     case 16:
-                        //OPR 0 16  从命令行读入一个输入置于栈顶
-                        System.out.println("please input a number");
-                        Scanner s = new Scanner(System.in);
-                        dataStack[top] = s.nextInt();
+                        //OPR 0 16  从读入一个整数输入置于栈顶
+                        int inputValue = Integer.parseInt(JOptionPane.showInputDialog("Please input a number"));
+                        dataStack[top] = inputValue;
                         //dataStack[top] = input.get(inputPtr++);
                         top++;
                         break;
                 }
             } else if (currentPcode.getF() == Operator.LOD) {
                 // LOD：将变量送到运行栈S的栈顶，这时A段为变量所在说明层中的相对位置。
-                dataStack[top] = dataStack[currentPcode.getA() + getBase(base, currentPcode.getL())];
-                top++;
+                dataStack[top++] = dataStack[currentPcode.getA() + getBase(base, currentPcode.getL())];
             } else if (currentPcode.getF() == Operator.STO) {
                 //STO：将运行栈S的栈顶内容送入某个变量单元中，A段为变量所在说明层中的相对位置。
                 dataStack[currentPcode.getA() + getBase(base, currentPcode.getL())] = dataStack[top - 1];
-                top--;
+                --top;
             } else if (currentPcode.getF() == Operator.CAL) {
                 //CAL：调用过程，这时A段为被调用过程的过程体（过程体之前一条指令）在目标程序区的入口地址。
                 //跳转时，将该层基地址，跳转层基地址，pc指针保存在栈中
@@ -185,13 +165,13 @@ public class Interpreter {
         } while (pc != 0);
     }
 
-    //已知该层基地址为nowBp,得到层差为lev的层的基地址
-    private int getBase(int nowBp,int lev) {
-        int oldBp = nowBp;
-        while (lev > 0) {
-            oldBp = dataStack[oldBp + 1];
-            lev--;
+
+    private int getBase(int now, int l) {
+        int res = now;
+        while (l > 0) {
+            res = dataStack[res + 1];
+            --l;
         }
-        return oldBp;
+        return res;
     }
 }

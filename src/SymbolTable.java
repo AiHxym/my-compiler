@@ -31,9 +31,6 @@ public class SymbolTable {
         ptr++;
     }
 
-    //在符号表当前层查找变量是否存在
-    //存疑？
-    //这样暴力查找好像存在一些问题
     public boolean isNowExists(String name, int level) {
         for (int i = allSymbol.size() - 1; i >= 0; --i) {
             if (allSymbol.get(i).getLevel() == level) {
@@ -47,13 +44,13 @@ public class SymbolTable {
         return false;
     }
 
-    //在符号表之前层查找符号是否存在
-    //存疑？
-    //暴力查找存在问题
     public boolean isPreExists(String name, int level) {
-        for (int i = 0; i < allSymbol.size(); i++) {
-            if (allSymbol.get(i).getName().equals(name) && allSymbol.get(i).getLevel() <= level) {
-                return true;
+        for (int i = allSymbol.size() - 1; i >= 0; --i) {
+            if(allSymbol.get(i).getLevel() <= level) {
+                level = allSymbol.get(i).getLevel();
+                if (allSymbol.get(i).getName().equals(name)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -61,7 +58,7 @@ public class SymbolTable {
 
     //按名称查找变量
     public EachSymbol getSymbol(String name) {
-        for (int i = allSymbol.size() - 1; i >= 0; i--) {
+        for (int i = allSymbol.size() - 1; i >= 0; --i) {
             if (allSymbol.get(i).getName().equals(name)) {
                 return allSymbol.get(i);
             }

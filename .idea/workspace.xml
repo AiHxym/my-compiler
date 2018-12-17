@@ -2,13 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0909ca85-e7a3-4ecd-8688-21cd51c4415c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/my-compiler/Compiler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/my-compiler/Compiler$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/my-compiler/Compiler$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/my-compiler/Compiler$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/my-compiler/Compiler$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/my-compiler/Compiler$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/my-compiler/Compiler$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/my-compiler/Compiler$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/my-compiler/Compiler$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/my-compiler/Compiler$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/my-compiler/Compiler$6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/my-compiler/Compiler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/my-compiler/Compiler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/my-compiler/GrammerAnalysis.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/my-compiler/GrammerAnalysis.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/my-compiler/Interpreter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/my-compiler/Interpreter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/my-compiler/SymbolTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/my-compiler/SymbolTable.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Compiler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Compiler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GrammerAnalysis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GrammerAnalysis.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Interpreter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interpreter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PcodeTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PcodeTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SymType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SymType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SymbolTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SymbolTable.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -18,58 +25,45 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/my_compiler$Compiler.ic" NAME="Compiler Coverage Results" MODIFIED="1545013126647" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="241" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Compiler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-6707">
-              <caret line="41" column="21" lean-forward="true" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
-              <folding>
-                <element signature="e#5565#5566#0" expanded="true" />
-                <element signature="e#5611#5612#0" expanded="true" />
-                <element signature="e#7383#7384#0" expanded="true" />
-                <element signature="e#7424#7425#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-8883">
+              <caret line="36" column="36" lean-forward="true" selection-start-line="36" selection-start-column="36" selection-end-line="36" selection-end-column="36" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GrammerAnalysis.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1095">
-              <caret line="349" column="52" lean-forward="true" selection-start-line="349" selection-start-column="52" selection-end-line="349" selection-end-column="52" />
+            <state relative-caret-position="3712">
+              <caret line="128" column="29" selection-start-line="128" selection-start-column="29" selection-end-line="128" selection-end-column="29" />
               <folding>
-                <element signature="e#26069#26070#0" expanded="true" />
-                <element signature="e#26100#26101#0" expanded="true" />
-                <element signature="e#26141#26142#0" expanded="true" />
-                <element signature="e#26172#26173#0" expanded="true" />
-                <element signature="e#26219#26220#0" expanded="true" />
-                <element signature="e#26268#26269#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#31391#31392#0" expanded="true" />
+                <element signature="e#31463#31464#0" expanded="true" />
+                <element signature="e#31559#31560#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/SymbolTable.java">
+        <entry file="file://$PROJECT_DIR$/src/Token.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="427">
-              <caret line="98" selection-start-line="98" selection-end-line="98" />
+            <state relative-caret-position="304">
+              <caret line="20" selection-start-line="20" selection-end-line="20" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#313#314#0" expanded="true" />
-                <element signature="e#368#369#0" expanded="true" />
-                <element signature="e#2271#2272#0" expanded="true" />
-                <element signature="e#2303#2304#0" expanded="true" />
-                <element signature="e#2337#2338#0" expanded="true" />
-                <element signature="e#2363#2364#0" expanded="true" />
-                <element signature="e#2397#2398#0" expanded="true" />
-                <element signature="e#2423#2424#0" expanded="true" />
-                <element signature="e#2458#2459#0" expanded="true" />
-                <element signature="e#2485#2486#0" expanded="true" />
-                <element signature="e#2538#2539#0" expanded="true" />
+                <element signature="e#527#528#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -78,8 +72,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/LexAnalysis.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-184">
-              <caret line="97" column="20" lean-forward="true" selection-start-line="97" selection-start-column="20" selection-end-line="97" selection-end-column="20" />
+            <state relative-caret-position="-1226">
+              <caret line="71" column="13" lean-forward="true" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#LexAnalysis#0;class#LexAnalysis#0" />
@@ -90,10 +84,42 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/SymbolTable.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1805">
+              <caret line="95" selection-start-line="95" selection-end-line="95" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#313#314#0" expanded="true" />
+                <element signature="e#368#369#0" expanded="true" />
+                <element signature="e#2270#2271#0" expanded="true" />
+                <element signature="e#2302#2303#0" expanded="true" />
+                <element signature="e#2336#2337#0" expanded="true" />
+                <element signature="e#2362#2363#0" expanded="true" />
+                <element signature="e#2396#2397#0" expanded="true" />
+                <element signature="e#2422#2423#0" expanded="true" />
+                <element signature="e#2457#2458#0" expanded="true" />
+                <element signature="e#2484#2485#0" expanded="true" />
+                <element signature="e#2537#2538#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/SymType.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="21" lean-forward="true" selection-start-column="21" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/EachSymbol.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-95">
-              <caret line="16" selection-start-line="16" selection-end-line="16" />
+            <state relative-caret-position="76">
+              <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="25" />
               <folding>
                 <element signature="e#833#834#0" expanded="true" />
                 <element signature="e#860#861#0" expanded="true" />
@@ -125,15 +151,51 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Interpreter.java">
+        <entry file="file://$PROJECT_DIR$/src/ErrorType.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4222">
-              <caret line="25" column="37" lean-forward="true" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
+            <state relative-caret-position="95">
+              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/PcodeTable.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="380">
+              <caret line="59" selection-start-line="59" selection-end-line="59" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#522#523#0" expanded="true" />
-                <element signature="e#568#569#0" expanded="true" />
-                <element signature="e#636#637#0" expanded="true" />
+                <element signature="e#1341#1342#0" expanded="true" />
+                <element signature="e#1394#1395#0" expanded="true" />
+                <element signature="e#1438#1439#0" expanded="true" />
+                <element signature="e#1469#1470#0" expanded="true" />
+                <element signature="e#1500#1501#0" expanded="true" />
+                <element signature="e#1538#1539#0" expanded="true" />
+                <element signature="e#1662#1663#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/EachPcode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="171">
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
+              <folding>
+                <element signature="e#216#217#0" expanded="true" />
+                <element signature="e#240#241#0" expanded="true" />
+                <element signature="e#276#277#0" expanded="true" />
+                <element signature="e#297#298#0" expanded="true" />
+                <element signature="e#322#323#0" expanded="true" />
+                <element signature="e#346#347#0" expanded="true" />
+                <element signature="e#377#378#0" expanded="true" />
+                <element signature="e#398#399#0" expanded="true" />
+                <element signature="e#423#424#0" expanded="true" />
+                <element signature="e#447#448#0" expanded="true" />
+                <element signature="e#478#479#0" expanded="true" />
+                <element signature="e#499#500#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -156,10 +218,23 @@
       <find>getPocdePtr</find>
       <find>PerPcode</find>
       <find>allPcode</find>
-      <find>EOF</find>
       <find>17</find>
       <find>21</find>
+      <find>aboutItem</find>
+      <find>helpMenu</find>
       <find>16</find>
+      <find>EOF</find>
+      <find>Operator.INT</find>
+      <find>LOD</find>
+      <find>CAL</find>
+      <find>Gra</find>
+      <find>symbolJScrollPane</find>
+      <find>Operator</find>
+      <find>jTr</find>
+      <find>Begin</find>
+      <find>body</find>
+      <find>jTree</find>
+      <find>condition</find>
     </findStrings>
     <replaceStrings>
       <replace>EachPcode</replace>
@@ -178,8 +253,8 @@
         <option value="$PROJECT_DIR$/src/ErrorType.java" />
         <option value="$PROJECT_DIR$/src/LexAnalysis.java" />
         <option value="$PROJECT_DIR$/src/SymType.java" />
-        <option value="$PROJECT_DIR$/src/SymbolTable.java" />
         <option value="$PROJECT_DIR$/src/PcodeTable.java" />
+        <option value="$PROJECT_DIR$/src/SymbolTable.java" />
         <option value="$PROJECT_DIR$/src/Interpreter.java" />
         <option value="$PROJECT_DIR$/src/Compiler.java" />
         <option value="$PROJECT_DIR$/src/GrammerAnalysis.java" />
@@ -187,9 +262,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="593" />
-    <option name="y" value="96" />
-    <option name="width" value="1294" />
+    <option name="x" value="-22" />
+    <option name="y" value="92" />
+    <option name="width" value="1940" />
     <option name="height" value="1100" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -198,7 +273,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -215,13 +290,13 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544992942593" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545014520280" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/PL0Compiler-master" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="SDKs" />
@@ -276,25 +351,24 @@
       <option name="presentableId" value="Default" />
       <updated>1544940898379</updated>
       <workItem from="1544940901442" duration="15933000" />
-      <workItem from="1544970856920" duration="21404000" />
+      <workItem from="1544970856920" duration="24249000" />
+      <workItem from="1544996577040" duration="16889000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37337000" />
+    <option name="totallyTimeSpent" value="57071000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="593" y="96" width="1294" height="1100" extended-state="0" />
-    <editor active="true" />
+    <frame x="-22" y="92" width="1940" height="1100" extended-state="0" />
     <layout>
       <window_info id="Designer" order="0" />
       <window_info id="UI Designer" order="1" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
-      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.27552673" />
+      <window_info active="true" content_ui="combo" id="Project" order="5" visible="true" weight="0.113829784" />
       <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Messages" />
       <window_info anchor="bottom" id="Duplicate detector" order="0" weight="0.32968238" />
       <window_info anchor="bottom" id="Version Control" order="1" />
       <window_info anchor="bottom" id="Terminal" order="2" />
@@ -303,11 +377,13 @@
       <window_info anchor="bottom" id="Docker" order="5" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="6" />
       <window_info anchor="bottom" id="Find" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="8" visible="true" weight="0.32919255" />
+      <window_info anchor="bottom" id="Run" order="8" weight="0.32919255" />
       <window_info anchor="bottom" id="Debug" order="9" weight="0.37784678" />
       <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="12" />
+      <window_info anchor="bottom" id="Messages" order="13" />
+      <window_info anchor="right" id="Coverage" side_tool="true" weight="0.32978722" />
       <window_info anchor="right" id="Theme Preview" order="0" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Palette&#9;" order="2" />
@@ -322,26 +398,26 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/GrammerAnalysis.java</url>
+          <line>31</line>
+          <properties class="GrammerAnalysis" method="compile">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Main.java" />
-    <entry file="file://$PROJECT_DIR$/src/Token.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SymType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Operator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -349,34 +425,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ErrorType.java">
+    <entry file="file://$PROJECT_DIR$/src/Interpreter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="12" selection-start-column="12" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PcodeTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="47" column="5" lean-forward="true" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
+        <state relative-caret-position="-437">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1341#1342#0" expanded="true" />
-            <element signature="e#1394#1395#0" expanded="true" />
-            <element signature="e#1438#1439#0" expanded="true" />
-            <element signature="e#1469#1470#0" expanded="true" />
-            <element signature="e#1662#1663#0" expanded="true" />
-            <element signature="e#1714#1715#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/EachPcode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+        <state relative-caret-position="171">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
           <folding>
+            <element signature="e#216#217#0" expanded="true" />
             <element signature="e#240#241#0" expanded="true" />
             <element signature="e#276#277#0" expanded="true" />
             <element signature="e#297#298#0" expanded="true" />
@@ -392,10 +456,84 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/PcodeTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="59" selection-start-line="59" selection-end-line="59" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1341#1342#0" expanded="true" />
+            <element signature="e#1394#1395#0" expanded="true" />
+            <element signature="e#1438#1439#0" expanded="true" />
+            <element signature="e#1469#1470#0" expanded="true" />
+            <element signature="e#1500#1501#0" expanded="true" />
+            <element signature="e#1538#1539#0" expanded="true" />
+            <element signature="e#1662#1663#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Token.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="e#527#528#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Compiler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8883">
+          <caret line="36" column="36" lean-forward="true" selection-start-line="36" selection-start-column="36" selection-end-line="36" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LexAnalysis.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1226">
+          <caret line="71" column="13" lean-forward="true" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#LexAnalysis#0;class#LexAnalysis#0" />
+            <element signature="method#doAnalysis#0;class#LexAnalysis#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SymbolTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1805">
+          <caret line="95" selection-start-line="95" selection-end-line="95" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#313#314#0" expanded="true" />
+            <element signature="e#368#369#0" expanded="true" />
+            <element signature="e#2270#2271#0" expanded="true" />
+            <element signature="e#2302#2303#0" expanded="true" />
+            <element signature="e#2336#2337#0" expanded="true" />
+            <element signature="e#2362#2363#0" expanded="true" />
+            <element signature="e#2396#2397#0" expanded="true" />
+            <element signature="e#2422#2423#0" expanded="true" />
+            <element signature="e#2457#2458#0" expanded="true" />
+            <element signature="e#2484#2485#0" expanded="true" />
+            <element signature="e#2537#2538#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SymType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="21" lean-forward="true" selection-start-column="21" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/EachSymbol.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-95">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="76">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="25" />
           <folding>
             <element signature="e#833#834#0" expanded="true" />
             <element signature="e#860#861#0" expanded="true" />
@@ -425,76 +563,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/LexAnalysis.java">
+    <entry file="file://$PROJECT_DIR$/src/ErrorType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-184">
-          <caret line="97" column="20" lean-forward="true" selection-start-line="97" selection-start-column="20" selection-end-line="97" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#LexAnalysis#0;class#LexAnalysis#0" />
-            <element signature="method#doAnalysis#0;class#LexAnalysis#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Interpreter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4222">
-          <caret line="25" column="37" lean-forward="true" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#522#523#0" expanded="true" />
-            <element signature="e#568#569#0" expanded="true" />
-            <element signature="e#636#637#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SymbolTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="98" selection-start-line="98" selection-end-line="98" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#313#314#0" expanded="true" />
-            <element signature="e#368#369#0" expanded="true" />
-            <element signature="e#2271#2272#0" expanded="true" />
-            <element signature="e#2303#2304#0" expanded="true" />
-            <element signature="e#2337#2338#0" expanded="true" />
-            <element signature="e#2363#2364#0" expanded="true" />
-            <element signature="e#2397#2398#0" expanded="true" />
-            <element signature="e#2423#2424#0" expanded="true" />
-            <element signature="e#2458#2459#0" expanded="true" />
-            <element signature="e#2485#2486#0" expanded="true" />
-            <element signature="e#2538#2539#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="95">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GrammerAnalysis.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1095">
-          <caret line="349" column="52" lean-forward="true" selection-start-line="349" selection-start-column="52" selection-end-line="349" selection-end-column="52" />
+        <state relative-caret-position="3712">
+          <caret line="128" column="29" selection-start-line="128" selection-start-column="29" selection-end-line="128" selection-end-column="29" />
           <folding>
-            <element signature="e#26069#26070#0" expanded="true" />
-            <element signature="e#26100#26101#0" expanded="true" />
-            <element signature="e#26141#26142#0" expanded="true" />
-            <element signature="e#26172#26173#0" expanded="true" />
-            <element signature="e#26219#26220#0" expanded="true" />
-            <element signature="e#26268#26269#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Compiler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6707">
-          <caret line="41" column="21" lean-forward="true" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
-          <folding>
-            <element signature="e#5565#5566#0" expanded="true" />
-            <element signature="e#5611#5612#0" expanded="true" />
-            <element signature="e#7383#7384#0" expanded="true" />
-            <element signature="e#7424#7425#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#31391#31392#0" expanded="true" />
+            <element signature="e#31463#31464#0" expanded="true" />
+            <element signature="e#31559#31560#0" expanded="true" />
           </folding>
         </state>
       </provider>

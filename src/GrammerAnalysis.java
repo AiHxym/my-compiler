@@ -1,9 +1,13 @@
 import java.io.File;
-import java.util.EventListener;
 import java.util.List;
 import java.util.ArrayList;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 public class GrammerAnalysis {
+    public JTree jTree;
+    public DefaultMutableTreeNode root = new DefaultMutableTreeNode("compiler");
+
     private LexAnalysis lexer;  //Lexer
     private List<Token> allToken;  //Keep all tokens
     private SymbolTable symbolTable;  //Keep symbols
@@ -26,23 +30,31 @@ public class GrammerAnalysis {
     }
 
     public boolean compile() {
-        program();
+
+        program(root);
+        jTree = new JTree(root);
         return (!isErrorHappen);
     }
 
-    private void program() {
-        block();
+    private void program(DefaultMutableTreeNode fa) {
+        DefaultMutableTreeNode son = new DefaultMutableTreeNode("Program");
+        block(son);
         if (allToken.get(tokenPtr).getType() == SymType.POI) {
             ++tokenPtr;
+            son.add(new DefaultMutableTreeNode("."));
             if (allToken.get(tokenPtr).getType() != SymType.EOF) {
                 errorHandle(18, "");
+            }
+            else{
+                fa.add(son);
             }
         } else {
             errorHandle(17, "");
         }
     }
 
-    private void block() {
+    private void block(DefaultMutableTreeNode fa) {
+        DefaultMutableTreeNode son = new DefaultMutableTreeNode("Block");
         //<分程序>::=[<常量说明部分>][<变量说明部分>][<过程说明部分>]<语句>
         int keep_address = address;
 
@@ -57,15 +69,15 @@ public class GrammerAnalysis {
         pcodeTable.add(Operator.JMP, 0, 0);
 
         if (allToken.get(tokenPtr).getType() == SymType.CON) {
-            conDeclare();
+            conDeclare(son);
         }
 
         if (allToken.get(tokenPtr).getType() == SymType.VAR) {
-            varDeclare();
+            varDeclare(son);
         }
 
         if (allToken.get(tokenPtr).getType() == SymType.PROC) {
-            proc();
+            proc(son);
         }
 
         pcodeTable.getAllPcode().get(tmpPcodePtr).setA(pcodeTable.getPcodePtr());
@@ -76,27 +88,34 @@ public class GrammerAnalysis {
             symbolTable.getAllSymbol().get(pos).setValue(pcodeTable.getPcodePtr() - symbolTable.getAllSymbol().get(pos).getSize() - 1);
         }
 
-        statement();
+        statement(son);
 
         pcodeTable.add(Operator.OPR, 0, 0);
+        fa.add(son);
 
         address = keep_address;
     }
 
-    private void conDeclare() {
+    private void conDeclare(DefaultMutableTreeNode fa) {
+        DefaultMutableTreeNode son = new DefaultMutableTreeNode("ConstDeclare");
         //<常量说明部分>::=const <常量定义>{,<常量定义>};
         if (allToken.get(tokenPtr).getType() == SymType.CON) {
+            son.add(new DefaultMutableTreeNode("const"));
             ++tokenPtr;
-            conHandle();
+            conHandle(son);
             while (allToken.get(tokenPtr).getType() == SymType.COMMA || allToken.get(tokenPtr).getType() == SymType.SYM) {
                 if (allToken.get(tokenPtr).getType() == SymType.COMMA) {
+                    son.add(new DefaultMutableTreeNode(","));
                     ++tokenPtr;
+
                 } else {
                     errorHandle(23, "");
                 }
-                conHandle();
+                conHandle(son);
             }
             if (allToken.get(tokenPtr).getType() == SymType.SEMIC) {
+                son.add(new DefaultMutableTreeNode(";"));
+                fa.add(son);
                 ++tokenPtr;
             } else { //缺少；
                 errorHandle(0, "");
@@ -106,25 +125,32 @@ public class GrammerAnalysis {
         }
     }
 
-    private void conHandle() {
+    private void conHandle(DefaultMutableTreeNode fa) {
+        DefaultMutableTreeNode son = new DefaultMutableTreeNode("conHandle");
         //<常量定义>::=<标识符>=<无符号整数>
         String name;
         int value;
         if (allToken.get(tokenPtr).getType() == SymType.SYM) {
             name = allToken.get(tokenPtr).getValue();
+            son.add(new DefaultMutableTreeNode(name));
             ++tokenPtr;
             if (allToken.get(tokenPtr).getType() == SymType.EQU || allToken.get(tokenPtr).getType() == SymType.CEQU) {
                 if (allToken.get(tokenPtr).getType() == SymType.CEQU) {
                     errorHandle(3, "");
                 }
+                else {
+                    son.add(new DefaultMutableTreeNode("="));
+                }
                 ++tokenPtr;
                 if (allToken.get(tokenPtr).getType() == SymType.CONST) {
                     value = Integer.parseInt(allToken.get(tokenPtr).getValue());
+                    son.add(new DefaultMutableTreeNode(allToken.get(tokenPtr).getValue()));
                     if (symbolTable.isNowExists(name, level)) {
                         errorHandle(15, name);
                     }
                     symbolTable.insertConst(name, level, value, address);
                     ++tokenPtr;
+                    fa.add(son);
                 }
             } else { //赋值没用=
                 errorHandle(3, "");
@@ -134,13 +160,16 @@ public class GrammerAnalysis {
         }
     }
 
-    private void varDeclare() {
+    private void varDeclare(DefaultMutableTreeNode fa) {
+        DefaultMutableTreeNode son = new DefaultMutableTreeNode("varDeclare");
         //<变量说明部分>::=var<标识符>{,<标识符>};
         String name;
         if (allToken.get(tokenPtr).getType() == SymType.VAR) {
+            son.add(new DefaultMutableTreeNode("var"));
             ++tokenPtr;
             if (allToken.get(tokenPtr).getType() == SymType.SYM) {
                 name = allToken.get(tokenPtr).getValue();
+                son.add(new DefaultMutableTreeNode(name));
                 if (symbolTable.isNowExists(name, level)) {
                     errorHandle(15, name);
                 }
@@ -149,12 +178,14 @@ public class GrammerAnalysis {
                 ++tokenPtr;
                 while (allToken.get(tokenPtr).getType() == SymType.COMMA || allToken.get(tokenPtr).getType() == SymType.SYM) {
                     if (allToken.get(tokenPtr).getType() == SymType.COMMA) {
+                        son.add(new DefaultMutableTreeNode(","));
                         ++tokenPtr;
                     } else {
                         errorHandle(23, "");
                     }
                     if (allToken.get(tokenPtr).getType() == SymType.SYM) {
                         name = allToken.get(tokenPtr).getValue();
+                        son.add(new DefaultMutableTreeNode(name));
                         if (symbolTable.isNowExists(name, level)) {
                             errorHandle(15, name);
                         }
@@ -170,6 +201,8 @@ public class GrammerAnalysis {
                     errorHandle(0, "");
                     return;
                 } else {
+                    son.add(new DefaultMutableTreeNode(";"));
+                    fa.add(son);
                     ++tokenPtr;
                 }
             } else { //非法标识符
@@ -182,41 +215,47 @@ public class GrammerAnalysis {
         }
     }
 
-    private void proc() {
+    private void proc(DefaultMutableTreeNode fa) {
+        DefaultMutableTreeNode son = new DefaultMutableTreeNode("Procedure");
         //<过程说明部分>::=<过程首部><分程序>{;<过程说明部分>};
         //<过程首部>::=procedure<标识符>;
         if (allToken.get(tokenPtr).getType() == SymType.PROC) {
+            son.add(new DefaultMutableTreeNode("procedure"));
             ++tokenPtr;
             int count = 0; //记录参数个数
             int pos; //记录该过程在符号表中的位置
             if (allToken.get(tokenPtr).getType() == SymType.SYM) {
-                String name = allToken.get(tokenPtr).getValue();
-                if (symbolTable.isNowExists(name, level)) {
-                    errorHandle(15, name);
-                }
-                pos = symbolTable.getPtr();
-                symbolTable.insertProc(name, level, address);
-                address += addIncrement;
-                level++;
-                tokenPtr++;
-
-                if (allToken.get(tokenPtr).getType() == SymType.SEMIC) {
+                    String name = allToken.get(tokenPtr).getValue();
+                    son.add(new DefaultMutableTreeNode(name));
+                    if (symbolTable.isNowExists(name, level)) {
+                        errorHandle(15, name);
+                    }
+                    pos = symbolTable.getPtr();
+                    symbolTable.insertProc(name, level, address);
+                    address += addIncrement;
+                    level++;
                     tokenPtr++;
-                } else {
-                    errorHandle(0, "");
-                }
 
-                block();
-
-                while (allToken.get(tokenPtr).getType() == SymType.SEMIC || allToken.get(tokenPtr).getType() == SymType.PROC) {
                     if (allToken.get(tokenPtr).getType() == SymType.SEMIC) {
+                        son.add(new DefaultMutableTreeNode(";"));
                         tokenPtr++;
                     } else {
                         errorHandle(0, "");
                     }
-                    level--;
-                    proc();
-                }
+
+                    block(son);
+
+                    while (allToken.get(tokenPtr).getType() == SymType.SEMIC || allToken.get(tokenPtr).getType() == SymType.PROC) {
+                        if (allToken.get(tokenPtr).getType() == SymType.SEMIC) {
+                            son.add(new DefaultMutableTreeNode(";"));
+                            tokenPtr++;
+                        } else {
+                            errorHandle(0, "");
+                        }
+                        level--;
+                        proc(son);
+                    }
+                    fa.add(son);
             } else {
                 errorHandle(-1, "");
                 return;
@@ -224,13 +263,16 @@ public class GrammerAnalysis {
         }
     }
 
-    private void body() {
+    private void body(DefaultMutableTreeNode fa) {
+        DefaultMutableTreeNode son = new DefaultMutableTreeNode("Body");
         //<复合语句>::=begin<语句>{;<语句>}end
         if (allToken.get(tokenPtr).getType() == SymType.BEGIN) {
+            son.add(new DefaultMutableTreeNode("Begin"));
             ++tokenPtr;
-            statement();
+            statement(son);
             while (allToken.get(tokenPtr).getType() == SymType.SEMIC || isHeadOfStatement()) {
                 if (allToken.get(tokenPtr).getType() == SymType.SEMIC) {
+                    son.add(new DefaultMutableTreeNode(";"));
                     ++tokenPtr;
                 } else {
                     if (allToken.get(tokenPtr).getType() != SymType.END) {
@@ -241,9 +283,11 @@ public class GrammerAnalysis {
                     errorHandle(21, "");
                     break;
                 }*/
-                statement();
+                statement(son);
             }
             if (allToken.get(tokenPtr).getType() == SymType.END) {
+                son.add(new DefaultMutableTreeNode("End"));
+                fa.add(son);
                 ++tokenPtr;
             } else { //缺少end
                 errorHandle(7, "");
@@ -255,17 +299,21 @@ public class GrammerAnalysis {
         }
     }
 
-    private void statement() {
+    private void statement(DefaultMutableTreeNode fa) {
+        DefaultMutableTreeNode son = new DefaultMutableTreeNode("Statement");
         //<语句>::=<赋值语句> | <条件语句> | <当循环语句> | <过程调用语句> | <复合语句> | <读语句> | <写语句> | <空>
         if (allToken.get(tokenPtr).getType() == SymType.IF) {
+            son.add(new DefaultMutableTreeNode("if"));
             //<条件语句>::=if<条件>then<语句>
             ++tokenPtr;
-            condition();
+            condition(son);
             if (allToken.get(tokenPtr).getType() == SymType.THEN) {
+                son.add(new DefaultMutableTreeNode("then"));
                 int pos = pcodeTable.getPcodePtr();
                 pcodeTable.add(Operator.JPC, 0, 0);
                 ++tokenPtr;
-                statement();
+                statement(son);
+                fa.add(son);
                 pcodeTable.getAllPcode().get(pos).setA(pcodeTable.getPcodePtr());
 
             } else {
@@ -273,28 +321,33 @@ public class GrammerAnalysis {
                 return;
             }
         } else if (allToken.get(tokenPtr).getType() == SymType.WHILE) {
+            son.add(new DefaultMutableTreeNode("While"));
             //<当循环语句>::=while<条件>do<语句>
             int pos1 = pcodeTable.getPcodePtr();
             ++tokenPtr;
-            condition();
+            condition(son);
             if (allToken.get(tokenPtr).getType() == SymType.DO) {
+                son.add(new DefaultMutableTreeNode("Do"));
                 int pos2 = pcodeTable.getPcodePtr();
                 pcodeTable.add(Operator.JPC, 0, 0);
                 ++tokenPtr;
-                statement();
+                statement(son);
                 pcodeTable.add(Operator.JMP, 0, pos1);
                 pcodeTable.getAllPcode().get(pos2).setA(pcodeTable.getPcodePtr());
+                fa.add(son);
             } else {
                 errorHandle(9, "");
                 return;
             }
         } else if (allToken.get(tokenPtr).getType() == SymType.CAL) {
+            son.add(new DefaultMutableTreeNode("Call"));
             //<过程调用语句>::=call<标识符>
             tokenPtr++;
             int count = 0; //参数数目
             EachSymbol tmp;
             if (allToken.get(tokenPtr).getType() == SymType.SYM) {
                 String name = allToken.get(tokenPtr).getValue();
+                son.add(new DefaultMutableTreeNode(name));
                 if (symbolTable.isPreExists(name, level)) {
                     tmp = symbolTable.getSymbol(name);
                     if (tmp.getType() == symbolTable.getProc()) {
@@ -307,18 +360,22 @@ public class GrammerAnalysis {
                     errorHandle(10, "");
                     return;
                 }
+                fa.add(son);
                 ++tokenPtr;
             } else {
                 errorHandle(1, "");
                 return;
             }
         } else if (allToken.get(tokenPtr).getType() == SymType.REA) {
+            son.add(new DefaultMutableTreeNode("Read"));
             //<读语句>::=read'('<标识符>{,<标识符>}')'
             tokenPtr++;
             if (allToken.get(tokenPtr).getType() == SymType.LBR) {
+                son.add(new DefaultMutableTreeNode("("));
                 tokenPtr++;
                 if (allToken.get(tokenPtr).getType() == SymType.SYM) {
                     String name = allToken.get(tokenPtr).getValue();
+                    son.add(new DefaultMutableTreeNode(name));
                     if (!symbolTable.isPreExists(name, level)) {
                         errorHandle(10, "");
                         return;
@@ -335,9 +392,11 @@ public class GrammerAnalysis {
                 }
                 tokenPtr++;
                 while (allToken.get(tokenPtr).getType() == SymType.COMMA) {
+                    son.add(new DefaultMutableTreeNode(","));
                     tokenPtr++;
                     if (allToken.get(tokenPtr).getType() == SymType.SYM) {
                         String name = allToken.get(tokenPtr).getValue();
+                        son.add(new DefaultMutableTreeNode(name));
                         if (!symbolTable.isPreExists(name, level)) {
                             errorHandle(10, "");
                             return;
@@ -358,6 +417,8 @@ public class GrammerAnalysis {
                     }
                 }
                 if (allToken.get(tokenPtr).getType() == SymType.RBR) {
+                    son.add(new DefaultMutableTreeNode(")"));
+                    fa.add(son);
                     tokenPtr++;
                 } else {
                     errorHandle(5, "");
@@ -368,19 +429,24 @@ public class GrammerAnalysis {
                 return;
             }
         } else if (allToken.get(tokenPtr).getType() == SymType.WRI) {
+            son.add(new DefaultMutableTreeNode("Write"));
             //<写语句>::=write '('<表达式>{,<表达式>}')'
             tokenPtr++;
             if (allToken.get(tokenPtr).getType() == SymType.LBR) {
+                son.add(new DefaultMutableTreeNode("("));
                 tokenPtr++;
-                expression();
+                expression(son);
                 pcodeTable.add(Operator.OPR, 0, 14);
                 while (allToken.get(tokenPtr).getType() == SymType.COMMA) {
+                    son.add(new DefaultMutableTreeNode(","));
                     tokenPtr++;
-                    expression();
+                    expression(son);
                     pcodeTable.add(Operator.OPR, 0, 14);
                 }
                 pcodeTable.add(Operator.OPR, 0, 15);
                 if (allToken.get(tokenPtr).getType() == SymType.RBR) {
+                    son.add(new DefaultMutableTreeNode(")"));
+                    fa.add(son);
                     tokenPtr++;
                 } else { //缺少)
                     errorHandle(5, "");
@@ -391,23 +457,29 @@ public class GrammerAnalysis {
             }
         } else if (allToken.get(tokenPtr).getType() == SymType.BEGIN) {
             //<复合语句>::=begin<语句>{;<语句>}end
-            body();
+            body(son);
+            fa.add(son);
         } else if (allToken.get(tokenPtr).getType() == SymType.SYM) {
+            son = new DefaultMutableTreeNode("Statement");
+
             //<赋值语句>::=<标识符>:=<表达式>
             String name = allToken.get(tokenPtr).getValue();
+            son.add(new DefaultMutableTreeNode(name));
             tokenPtr++;
             if (allToken.get(tokenPtr).getType() == SymType.CEQU || allToken.get(tokenPtr).getType() == SymType.EQU || allToken.get(tokenPtr).getType() == SymType.COL) {
                 if (allToken.get(tokenPtr).getType() == SymType.EQU || allToken.get(tokenPtr).getType() == SymType.COL) {
                     errorHandle(3, "");
                 }
+                son.add(new DefaultMutableTreeNode(":="));
                 tokenPtr++;
-                expression();
+                expression(son);
                 if (!symbolTable.isPreExists(name, level)) {
                     errorHandle(14, name);
                     return;
                 } else {
                     EachSymbol tmp = symbolTable.getSymbol(name);
                     if (tmp.getType() == symbolTable.getVar()) {
+                        fa.add(son);
                         pcodeTable.add(Operator.STO, level - tmp.getLevel(), tmp.getAddress());
                     } else {
                         errorHandle(13, name);
@@ -419,14 +491,16 @@ public class GrammerAnalysis {
                 return;
             }
         } else if (allToken.get(tokenPtr).getType() == SymType.REP) {
+            son.add(new DefaultMutableTreeNode("Repeat"));
             //<重复语句> ::= repeat<语句>{;<语句>}until<条件>
             tokenPtr++;
             int pos = pcodeTable.getPcodePtr();
-            statement();
+            statement(son);
             while (allToken.get(tokenPtr).getType() == SymType.SEMIC || isHeadOfStatement()) {
                 if (isHeadOfStatement()) {
                     errorHandle(1, "");
                 } else {
+                    son.add(new DefaultMutableTreeNode(";"));
                     tokenPtr++;
                 }
                 if (allToken.get(tokenPtr).getType() == SymType.UNT) {
@@ -434,33 +508,37 @@ public class GrammerAnalysis {
                     break;
                 }
                 tokenPtr++;
-                statement();
+                statement(son);
             }
             if (allToken.get(tokenPtr).getType() == SymType.UNT) {
+                son.add(new DefaultMutableTreeNode("Until"));
                 tokenPtr++;
-                condition();
+                condition(son);
                 pcodeTable.add(Operator.JPC, 0, pos);
+                fa.add(son);
             } else {
                 errorHandle(19, "");
                 return;
             }
-        } else {
-//            errorHandle(1, "");
-            return;
         }
     }
 
-    private void condition() {
+    private void condition(DefaultMutableTreeNode fa) {
+        DefaultMutableTreeNode son = new DefaultMutableTreeNode("condition");
         //<条件>::=<表达式><关系运算符><表达式> | odd<表达式>
         if (allToken.get(tokenPtr).getType() == SymType.ODD) {
+            son.add(new DefaultMutableTreeNode("ODD"));
             pcodeTable.add(Operator.OPR, 0, 6);
             tokenPtr++;
-            expression();
+            expression(son);
+            fa.add(son);
         } else {
-            expression();
+            expression(son);
             SymType tmp = allToken.get(tokenPtr).getType();
+            son.add(new DefaultMutableTreeNode(tmp));
             tokenPtr++;
-            expression();
+            expression(son);
+            fa.add(son);
             if (tmp == SymType.EQU) { //两个结果是否相等
                 pcodeTable.add(Operator.OPR, 0, 8);
             } else if (tmp == SymType.NE) { //两个结果是否不等
@@ -479,60 +557,75 @@ public class GrammerAnalysis {
         }
     }
 
-    private void expression() {
+    private void expression(DefaultMutableTreeNode fa) {
+        DefaultMutableTreeNode son = new DefaultMutableTreeNode("expression");
         //<表达式>::=[+|-]<项>{<加法运算符><项>}
         //<加法运算符>::=+|-
         SymType tmp = allToken.get(tokenPtr).getType();
         if (tmp == SymType.ADD || tmp == SymType.SUB) {
+            son.add(new DefaultMutableTreeNode(tmp));
             tokenPtr++;
         }
-        term();
+        term(son);
         if (tmp == SymType.SUB) {
             pcodeTable.add(Operator.OPR, 0, 1);
         }
         while (allToken.get(tokenPtr).getType() == SymType.ADD || allToken.get(tokenPtr).getType() == SymType.SUB) {
             tmp = allToken.get(tokenPtr).getType();
+            son.add(new DefaultMutableTreeNode(tmp));
             tokenPtr++;
-            term();
+            term(son);
             if (tmp == SymType.ADD) {
                 pcodeTable.add(Operator.OPR, 0, 2);
             } else if (tmp == SymType.SUB) {
                 pcodeTable.add(Operator.OPR, 0, 3);
             }
         }
+        fa.add(son);
     }
 
-    private void term() {
+    private void term(DefaultMutableTreeNode fa) {
+        DefaultMutableTreeNode son = new DefaultMutableTreeNode("Term");
         //<项>::=<因子>{<乘法运算符><因子>}
         //<乘法运算符>::=*|/
-        factor();
+        factor(son);
         while (allToken.get(tokenPtr).getType() == SymType.MUL || allToken.get(tokenPtr).getType() == SymType.DIV) {
             SymType tmp = allToken.get(tokenPtr).getType();
+            son.add(new DefaultMutableTreeNode(tmp));
             tokenPtr++;
-            factor();
+            factor(son);
             if (tmp == SymType.MUL) {
                 pcodeTable.add(Operator.OPR, 0, 4);
             } else if (tmp == SymType.DIV) {
                 pcodeTable.add(Operator.OPR, 0, 5);
             }
         }
+        fa.add(son);
     }
 
-    private void factor() {
+    private void factor(DefaultMutableTreeNode fa) {
+        DefaultMutableTreeNode son = new DefaultMutableTreeNode("Factor");
+
         //<因子>::=<标识符> | <无符号整数> | '('<表达式>')'
         if (allToken.get(tokenPtr).getType() == SymType.CONST) {
+            son.add(new DefaultMutableTreeNode(allToken.get(tokenPtr).getValue()));
             pcodeTable.add(Operator.LIT, 0, Integer.parseInt(allToken.get(tokenPtr).getValue()));
             ++tokenPtr;
+            fa.add(son);
         } else if (allToken.get(tokenPtr).getType() == SymType.LBR) {
+            son.add(new DefaultMutableTreeNode("("));
             ++tokenPtr;
-            expression();
+            expression(son);
             if (allToken.get(tokenPtr).getType() == SymType.RBR) {
+                son.add(new DefaultMutableTreeNode(")"));
                 ++tokenPtr;
+                fa.add(son);
             } else { //缺少右括号
                 errorHandle(5, "");
             }
         } else if (allToken.get(tokenPtr).getType() == SymType.SYM) {
             String name = allToken.get(tokenPtr).getValue();
+            son.add(new DefaultMutableTreeNode(name));
             if (!symbolTable.isPreExists(name, level)) {
                 errorHandle(10, "");
                 return;
@@ -540,8 +633,10 @@ public class GrammerAnalysis {
                 EachSymbol tmp = symbolTable.getSymbol(name);
                 if (tmp.getType() == symbolTable.getVar()) {
                     pcodeTable.add(Operator.LOD, level - tmp.getLevel(), tmp.getAddress());
+                    fa.add(son);
                 } else if (tmp.getType() == symbolTable.getCon()) {
                     pcodeTable.add(Operator.LIT, 0, tmp.getValue());
+                    fa.add(son);
                 } else {
                     errorHandle(12, "");
                     return;

@@ -30,7 +30,6 @@ public class GrammerAnalysis {
     }
 
     public boolean compile() {
-
         program(root);
         jTree = new JTree(root);
         return (!isErrorHappen);
@@ -44,8 +43,7 @@ public class GrammerAnalysis {
             son.add(new DefaultMutableTreeNode("."));
             if (allToken.get(tokenPtr).getType() != SymType.EOF) {
                 errorHandle(18, "");
-            }
-            else{
+            } else {
                 fa.add(son);
             }
         } else {
@@ -137,8 +135,7 @@ public class GrammerAnalysis {
             if (allToken.get(tokenPtr).getType() == SymType.EQU || allToken.get(tokenPtr).getType() == SymType.CEQU) {
                 if (allToken.get(tokenPtr).getType() == SymType.CEQU) {
                     errorHandle(3, "");
-                }
-                else {
+                } else {
                     son.add(new DefaultMutableTreeNode("="));
                 }
                 ++tokenPtr;
@@ -225,37 +222,37 @@ public class GrammerAnalysis {
             int count = 0; //记录参数个数
             int pos; //记录该过程在符号表中的位置
             if (allToken.get(tokenPtr).getType() == SymType.SYM) {
-                    String name = allToken.get(tokenPtr).getValue();
-                    son.add(new DefaultMutableTreeNode(name));
-                    if (symbolTable.isNowExists(name, level)) {
-                        errorHandle(15, name);
-                    }
-                    pos = symbolTable.getPtr();
-                    symbolTable.insertProc(name, level, address);
-                    address += addIncrement;
-                    level++;
-                    tokenPtr++;
+                String name = allToken.get(tokenPtr).getValue();
+                son.add(new DefaultMutableTreeNode(name));
+                if (symbolTable.isNowExists(name, level)) {
+                    errorHandle(15, name);
+                }
+                pos = symbolTable.getPtr();
+                symbolTable.insertProc(name, level, address);
+                address += addIncrement;
+                level++;
+                tokenPtr++;
 
+                if (allToken.get(tokenPtr).getType() == SymType.SEMIC) {
+                    son.add(new DefaultMutableTreeNode(";"));
+                    tokenPtr++;
+                } else {
+                    errorHandle(0, "");
+                }
+
+                block(son);
+
+                while (allToken.get(tokenPtr).getType() == SymType.SEMIC || allToken.get(tokenPtr).getType() == SymType.PROC) {
                     if (allToken.get(tokenPtr).getType() == SymType.SEMIC) {
                         son.add(new DefaultMutableTreeNode(";"));
                         tokenPtr++;
                     } else {
                         errorHandle(0, "");
                     }
-
-                    block(son);
-
-                    while (allToken.get(tokenPtr).getType() == SymType.SEMIC || allToken.get(tokenPtr).getType() == SymType.PROC) {
-                        if (allToken.get(tokenPtr).getType() == SymType.SEMIC) {
-                            son.add(new DefaultMutableTreeNode(";"));
-                            tokenPtr++;
-                        } else {
-                            errorHandle(0, "");
-                        }
-                        level--;
-                        proc(son);
-                    }
-                    fa.add(son);
+                    level--;
+                    proc(son);
+                }
+                fa.add(son);
             } else {
                 errorHandle(-1, "");
                 return;
@@ -761,7 +758,9 @@ public class GrammerAnalysis {
         return symbolTable.getAllSymbol();
     }
 
-    public List<EachPcode> getAllPcode() { return pcodeTable.getAllPcode(); }
+    public List<EachPcode> getAllPcode() {
+        return pcodeTable.getAllPcode();
+    }
 
     public void interpreter() {
         Interpreter one = new Interpreter();
@@ -770,32 +769,3 @@ public class GrammerAnalysis {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

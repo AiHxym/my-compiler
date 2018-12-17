@@ -73,7 +73,7 @@ public class Compiler extends JFrame{
     private List<String> output;
     private boolean success = false;
 
-    JFrame tmp = new JFrame("语法树");
+
 
     public Compiler() {
         init();
@@ -81,7 +81,7 @@ public class Compiler extends JFrame{
 
     private void init() {
 
-        JFrame frame = new JFrame("PL0Compiler");
+        JFrame frame = new JFrame("Compiler");
         frame.setBounds(300, 300, 700, 450);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -255,9 +255,11 @@ public class Compiler extends JFrame{
             consoleMessage += "compile succeed!\n";
             //consoleMessage += "请输入" + readNum + "个数，每行一个\n";
             errorMessage.setText(consoleMessage);
-
-            tmp.add(gsa.jTree);
-            tmp.setVisible(true);
+            JFrame tree = new JFrame("语法树");
+            tree.setBounds(300, 300, 700, 450);
+            tree.setDefaultCloseOperation(EXIT_ON_CLOSE);
+            tree.add(gsa.jTree);
+            tree.setVisible(true);
         } else {
             displayErrorMessage();
             consoleMessage += "compile failed!";

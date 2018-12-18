@@ -46,11 +46,6 @@ public class GrammerAnalysis {
     private void block() {
         int keep_address = address;
 
-        int start = symbolTable.getPtr();
-        int pos = 0;
-        address = 3;
-
-
     }
 
 }

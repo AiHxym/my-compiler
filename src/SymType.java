@@ -4,7 +4,7 @@ public enum SymType {
     EQU, LT, LTE, GTE, GT, NE, ADD, SUB, MUL, DIV,
     //=, <, <=, >=, >, <>, +, -, *, /
     SYM, CONST,
-    //symbol, variable
+    //symbol, const
     CEQU, COMMA, SEMIC, POI, LBR, RBR,
     //:=, ',' , ';', '.', '(', ')'
     COL,

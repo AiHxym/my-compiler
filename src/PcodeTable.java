@@ -47,7 +47,7 @@ public class PcodeTable {
         return allPcode;
     }
 
-    public int getPocdePtr(){
+    public int getPcodePtr(){
         return allPcode.size();
     }
 
@@ -55,8 +55,8 @@ public class PcodeTable {
         allPcode.add(pcode);
     }
 
-    public void add(Operator L, int F, int A) {
-        allPcode.add(new EachPcode(L, F, A));
+    public void add(Operator F, int L, int A) {
+        allPcode.add(new EachPcode(F, L, A));
     }
 
 }
